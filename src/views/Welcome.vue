@@ -1,16 +1,53 @@
 <template>
   <div class="container">
-    <h1 >Welcome</h1>
-    <button class="btn btn-secondary">add</button>
+    <div class="row">
+      <div class="d-flex justify-content-center my-5">
+        <div class="card w-75 rounded-4">
+          <div class="card-body">
+            <div v-if="showLoginForm">
+              <Signup></Signup>
+              <div class="text-center mt-3">
+                <p>Not a member? 
+                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Create Account</span>
+                </p>
+              </div>
+            </div>
+            <div v-else>
+              <Login></Login>
+              <div class="text-center mt-3">
+                <p>Already an account? 
+                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Login</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
+import Login from '../components/Login'
+import Signup from '../components/Signup'
+
 export default {
+  components: {
+    Login, Signup 
+  },
+
+  setup() {
+    let showLoginForm = ref(true);
+
+    return { showLoginForm }; 
+  }
 
 }
 </script>
 
-<style>
-
+<style scoped>
+  span {
+    cursor: pointer;
+  }
 </style>
