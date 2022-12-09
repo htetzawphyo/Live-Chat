@@ -19,7 +19,7 @@
 
 <script>
 import { ref } from '@vue/reactivity';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/config';
 
 export default {
@@ -35,6 +35,7 @@ export default {
                 if(!res){
                     throw new Error("Could not create account!");
                 }
+                await updateProfile(res.user, { displayName: name.value })
             } catch(err) {
                 error.value = err.message;
             }
