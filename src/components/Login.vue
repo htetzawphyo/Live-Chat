@@ -9,23 +9,31 @@
           <small class="fw-bold text-secondary">PASSWORD</small>
           <input type="password" class="form-control rounded-0 shadow-none" placeholder="Password" v-model="password">
       </div>
+      <div class="alert alert-danger rounded-0" role="alert" v-if="error">
+        {{error}}
+      </div>
       <button type="submit" class="btn btn-outline-success rounded-0">Login</button>
     </form>
   </template>
   
   <script>
-  import { ref } from '@vue/reactivity';
+import { ref } from '@vue/reactivity';
+import useSignin from '../composables/useSignin';
   
   export default {
       setup() {
           let email = ref("");
           let password = ref("");
   
-          let login = () => {
-              console.log(email.value, password.value)
+          let { error, loginAcc } = useSignin();
+          let login = async() => {
+            let res = await loginAcc(email.value, password.value);
+            if(res){
+                console.log(res.user);
+            }
           }
   
-          return {email, password, login}
+          return {email, password, login, error}
       }
   }
   </script>
