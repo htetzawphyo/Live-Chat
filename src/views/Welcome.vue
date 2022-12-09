@@ -7,16 +7,16 @@
             <div v-if="showLoginForm">
               <Signup></Signup>
               <div class="text-center mt-3">
-                <p>Not a member? 
-                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Create Account</span>
+                <p>Already an account? 
+                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Login</span>
                 </p>
-              </div>
+              </div>              
             </div>
             <div v-else>
               <Login></Login>
               <div class="text-center mt-3">
-                <p>Already an account? 
-                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Login</span>
+                <p>Not a member? 
+                <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Create Account</span>
                 </p>
               </div>
             </div>
