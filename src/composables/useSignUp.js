@@ -11,9 +11,18 @@ let createAccount = async(name,email, password) => {
             throw new Error("Could not create account!");
         }
         await updateProfile(res.user, { displayName: name })
-        // return res;
+        return res;
     } catch(err) {
-        error.value = err.message;
+        switch(err.code) {
+            case 'auth/email-already-in-use': 
+                error.value = 'This email is already taken.'
+                break;
+            case 'auth/weak-password':
+                error.value = 'Password should be at least 6 characters.'
+                break;
+            default:
+                error.value = 'Something wrong!'
+        }
     }
 }
 

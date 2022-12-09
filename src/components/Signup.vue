@@ -13,6 +13,9 @@
         <small class="fw-bold text-secondary">PASSWORD</small>
         <input type="password" class="form-control rounded-0 shadow-none" placeholder="Password" v-model="password">
     </div>
+    <div class="alert alert-danger rounded-0" role="alert" v-if="error">
+        {{error}}
+    </div>
     <button type="submit" class="btn btn-outline-success rounded-0">Submit</button>
   </form>
 </template>
@@ -29,10 +32,10 @@ export default {
 
         let {error, createAccount} = useSignUp();
         let submitData = async() => {
-            await createAccount(name.value, email.value, password.value);
-            //  ====== > WITH RESPONSE < ======
-            // let res = await createAccount(name.value, email.value, password.value);
-            // console.log(res.user)
+            let res = await createAccount(name.value, email.value, password.value);
+            if(res) {
+                console.log(res.user);
+            }
         }
 
         return { name, email, password, submitData, error}
