@@ -1,9 +1,7 @@
 <template>
-    <nav class="navBar">
-        <!-- <router-link :to="{name:'home'}" class="navItem">Home</router-link>
-        <router-link :to="{name:'create'}" class="navItem">Create</router-link> -->
+    <nav class="navBar" v-if="user">
         <div>
-            <small>DISPLAY NAME</small>
+            <small>{{user.displayName}}</small>
         </div>
         <div>
             <button class="btn btn-outline-danger btn-sm rounded-0" @click="logOut">logout</button>
@@ -12,15 +10,20 @@
 </template>
 
 <script>
-import logout from '../composables/logout'
+import logout from '../composables/logout';
+import getUser from '../composables/getUser';
 
 export default {
     setup() {
+        // Logout 
         let { error, logOutUser } = logout();
         let logOut = async() => {
             await logOutUser();
         }
-        return { logOut, error }
+
+        // Get User
+        let { user } = getUser();
+        return { logOut, error, user }
     }
 }
 </script>
@@ -33,16 +36,4 @@ export default {
         justify-content: space-between;
         align-items: center;
     }
-    /* .navItem {
-        color: rgb(65, 61, 61);
-        text-decoration: none;
-        margin-left: 20px;
-        
-    }
-    .navItem:hover {
-        color: indigo;
-    }
-    .router-link-active {
-        border-bottom: 2px solid indigo;
-    } */
 </style>
