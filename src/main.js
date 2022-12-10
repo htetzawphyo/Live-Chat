@@ -5,7 +5,11 @@ import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import './assets/global.css'
+import { auth } from './firebase/config';
 
-createApp(App).use(router).mount('#app')
-
-
+let app;
+auth.onAuthStateChanged(() => {
+    if(!app){
+        app = createApp(App).use(router).mount('#app')
+    }
+})
