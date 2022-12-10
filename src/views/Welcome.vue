@@ -5,7 +5,7 @@
         <div class="card w-75 rounded-4">
           <div class="card-body">
             <div v-if="showLoginForm">
-              <Signup></Signup>
+              <Signup @enterChatroom="enterChatroom"></Signup>
               <div class="text-center mt-3">
                 <p>Already an account? 
                 <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Login</span>
@@ -13,7 +13,7 @@
               </div>              
             </div>
             <div v-else>
-              <Login></Login>
+              <Login @enterChatroom="enterChatroom"></Login>
               <div class="text-center mt-3">
                 <p>Not a member? 
                 <span class="text-decoration-underline text-primary" @click="(showLoginForm=!showLoginForm)">Create Account</span>
@@ -31,6 +31,7 @@
 import { ref } from '@vue/reactivity'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
+import { useRouter } from 'vue-router'
 
 export default {
   components: {
@@ -39,8 +40,13 @@ export default {
 
   setup() {
     let showLoginForm = ref(true);
+    let router = useRouter();
 
-    return { showLoginForm }; 
+    let enterChatroom = () => {
+      router.push({name: 'chatroom'})
+    }
+
+    return { showLoginForm, enterChatroom }; 
   }
 
 }
