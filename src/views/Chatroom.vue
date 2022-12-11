@@ -1,10 +1,12 @@
 <template>
-  <div class="container-fluid mt-3">
-    <div class="row d-flex justify-content-center">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center mt-3">
       <div class="col-md-8 col-sm-12">
         <div class="card">
           <div class="card-body">
             <Navbar></Navbar>
+            <hr>
+            <ChatWindow></ChatWindow>
             <hr>
             <NewChatForm></NewChatForm>
           </div>
@@ -15,6 +17,7 @@
 </template>
 
 <script>
+import ChatWindow from '../components/chatWindow'
 import NewChatForm from '../components/NewChatForm'
 import { watch } from '@vue/runtime-core'
 import Navbar from '../components/Navbar'
@@ -23,6 +26,7 @@ import { useRouter } from 'vue-router';
 
 export default {
   components: {
+    ChatWindow,
     NewChatForm, Navbar },
 
   setup() {
@@ -39,5 +43,6 @@ export default {
 </script>
 
 <style>
+
 
 </style>

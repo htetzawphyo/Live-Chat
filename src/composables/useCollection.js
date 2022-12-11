@@ -7,8 +7,6 @@ let useCollection = (collectionName) => {
 
     let addDocument = async(doc) => {
         try {
-            // await db.collection(collectionName).addDoc(doc);
-            // let setCollection = collection(db, collectionName);
             await addDoc(collection(db, collectionName), doc)
         } catch (err) {
             error.value = err;

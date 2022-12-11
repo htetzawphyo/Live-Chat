@@ -1,6 +1,5 @@
 <template>
-  <!-- <input type="text" class="form-control rounded-0 shadow-none" @keypress.enter="handleSubmit" v-model="message"> -->
-  <textarea class="form-control rounded-0 shadow-none" @keypress.enter="handleSubmit" v-model="message"></textarea>
+  <textarea class="form-control rounded-0 shadow-none" placeholder="Enter Your Message" @keypress.enter="handleSubmit" v-model="message"></textarea>
 </template>
 
 <script>
@@ -21,9 +20,8 @@ export default {
                 user: user.value.displayName,
                 created_at: serverTimestamp()
             }
-            await addDocument(chat)
-            console.log(chat, error)
             message.value = "";
+            await addDocument(chat)
         }
 
         return { message, handleSubmit }
