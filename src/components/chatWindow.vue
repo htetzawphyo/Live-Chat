@@ -1,7 +1,7 @@
 <template>
-  <div class="overflow-auto chat-window mb-3">
-    <div class="messages " >
-        <div v-for="message in formattedMsg" :key="message.id" class="mb-3">
+  <div class="overflow-auto chat-window mb-3" ref="msgBox">
+    <div class="messages"  >
+        <div v-for="message in formattedMsg" :key="message.id" class="mb-3" >
             <span class="created_at text-muted">{{ message.created_at }}</span>
             <span class="fw-bold fs-6">{{ message.user }}</span> &nbsp;
             <span>{{ message.msg }}</span>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core';
+import { computed, onUpdated, ref } from 'vue';
 import getMessages from '../composables/getMessages';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -19,6 +19,11 @@ export default {
     setup() {
         
         let {messages} = getMessages();
+        let msgBox = ref(null)
+        
+        onUpdated(() => {
+            msgBox.value.scrollTop = msgBox.value.scrollHeight
+        })
 
         let formattedMsg = computed( () => {
             return messages.value.map( msg => {
@@ -27,7 +32,7 @@ export default {
             })
         })
 
-        return { formattedMsg }
+        return { formattedMsg, msgBox }
     }
 }
 </script>
